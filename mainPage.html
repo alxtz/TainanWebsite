@@ -5,8 +5,10 @@
         <meta charset="UTF-8">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
         <style>
-            body
+            #map
             {
+                width: 1000px;
+                height: 650px;
                 background-image: url("Images/background.png");
                 background-size: 1000px 650px;
                 background-repeat: no-repeat;
@@ -15,12 +17,12 @@
             }
             svg
             {
-                margin-left: 424px;
-                margin-top: 90px;
+                margin-left: 422px;
+                margin-top: 112px;
             }
             svg polygon
             {
-                fill-opacity: 0;
+                fill-opacity: 0.5;
                 fill: cyan;
                 stroke: black;
                 stroke-width: 1px;
@@ -30,7 +32,8 @@
     </head>
     
     <body>
-        <svg height="210" width="500">
+        <div id="map">
+            <svg height="210" width="500">
             <polygon 
             points="
             30,30
@@ -45,6 +48,7 @@
             2 , 44" 
             />
         </svg>
+        </div>
     </body>
     
 </html>
