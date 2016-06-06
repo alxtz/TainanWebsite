@@ -5,27 +5,34 @@
         <meta charset="UTF-8">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
         <script>
+            
         var popedOut = false;
-        function popOut()
+        
+        //中文的講解
+        var introTextChinese= ["安平古堡，古稱奧倫治城（Orange）、位於今臺灣臺南市。\n最早建於1624年，是臺灣最早的要塞建築。自建城以來，曾經是荷蘭人統治臺灣的中樞。\n安平古堡有兩處遺蹟被列為古蹟，為國定古蹟臺灣城殘蹟。\n而一般民眾登高望遠的瞭望臺，多被以為是安平古堡。\n但事實上是1970年代將日治時期燈塔改建而成，不屬於古蹟。\n古堡建築屋舍純紅色磚瓦，黃昏時與日落相煇映，景色優美。\n「安平夕照」1953年獲臺灣省政府選為臺灣八景之一。\n" ,  "				臺灣本島最早媽祖廟\n蘇同炳氏著臺灣古今談「最早的媽祖廟」一文稱：\n「澎湖天后宮之外，臺灣本島的媽祖廟，以舊時位在安平的『開臺天后宮』為最早。\n鄭成功的船隊就從湄洲嶼媽祖廟中迎來軟身媽祖神……。」\n「無論是臺南或北港的天后宮，事實上都是由資格最老的安平開臺天后宮分靈出去的。\n所謂『分靈』，實際上祇是攜取舊廟的香灰，塑入新廟的神像。\n通過這種方式，不但可以興建無數個的媽祖廟，\n亦可使全臺灣的大小媽祖廟，都與安平的『開臺天后宮』保持血緣關係；\n而安平開臺天后宮的神像來自湄洲嶼，就間接說明了臺灣各地的媽祖廟，\n都是由湄洲媽祖廟所派生繁衍的。」"
+];
+        
+        function popOut( placeName )
         {
-            //$("div.popOut").toggle();
+            //設定是要彈出或消失
             if(popedOut==false)
             {
                 $("div.popOut").animate({opacity: '1'} , 1000);
                 popedOut = true;
+                $("div.popOut div#explainText pre").text(introTextChinese[placeName]);
             }
             else
             {
                 $("div.popOut").animate({opacity: '0'});
                 popedOut = false;
             }
-            
-            var msg = new SpeechSynthesisUtterance("Fort Zeelandia");
-            window.speechSynthesis.speak(msg);
         }
+        
         $(document).ready(function(){
+            //選取所有的polygon，給他們被點擊的功能
             $("svg.canvas polygon").click(function(){
-                popOut();
+                var elementName = $(this).attr("placeName");
+                popOut(elementName);
             });
         });
         </script>
@@ -69,15 +76,15 @@
             {
                 background-color: aquamarine;
                 width: 96%;
-                height: 30%;
+                height: 35%;
                 margin: 2%;
                 padding:0;
             }
             /*設定文字說明方塊的文字*/
             div.popOut div#explainText pre
             {
-                margin: 0;
-                padding: 0;
+                margin:0;
+                padding: 2%;
                 font-size: 50%;
             }
             
@@ -122,19 +129,14 @@
             </div>
             <img src="Images/castle.jpg">
             <div id = "explainText">
-                <pre>安平古堡，古稱奧倫治城（Orange）、位於今臺灣臺南市。
-最早建於1624年，是臺灣最早的要塞建築。自建城以來，曾經是荷蘭人統治臺灣的中樞。
-安平古堡有兩處遺蹟被列為古蹟，為國定古蹟臺灣城殘蹟。
-而一般民眾登高望遠的瞭望臺，多被以為是安平古堡。
-但事實上是1970年代將日治時期燈塔改建而成，不屬於古蹟。
-古堡建築屋舍純用紅色磚瓦，黃昏時與日落相煇映，景色優美。
-「安平夕照」1953年獲臺灣省政府選為臺灣八景之一。</pre>
+                <pre>test</pre>
             </div>
         </div>
         
         <div id="map">
             <svg class = "canvas" height="620" width="1020">
-                <polygon points = " 785 , 228
+                <polygon placeName = "1"
+                                    points = " 785 , 228
                                                        878 , 254
                                                        867 , 284
                                                        776 , 255"/>
