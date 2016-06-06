@@ -4,51 +4,82 @@
     <head>
         <meta charset="UTF-8">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+        <script>
+        function popOut()
+        {
+            $("div.popOut").toggle();
+        }
+        $(document).ready(function(){
+            $("svg.block polygon").click(function(){
+                popOut();
+            });
+        });
+        </script>
         <style>
-            #map
+            body
             {
-                width: 1000px;
-                height: 650px;
+                margin: 0;
+                border: 1px solid red;
+            }
+            
+            div.popOut
+            {
+                margin-left: 100px;
+                margin-top: 100px;
+                width: 30px;
+                height: 30px;
+                position: fixed;
+                background-color: blue;
+                display: none;
+            }
+            
+            div#test
+            {
+                width:500px;
+                height: 500px;
+            }
+            
+            div#map
+            {
+                width: 1020px;
+                height: 620px;
+                border: 1px solid black;
                 background-image: url("Images/background.png");
-                background-size: 1000px 650px;
+                background-size: 1000px 600px;
                 background-repeat: no-repeat;
-                background-position: center;
-                background-attachment: fixed;
             }
-            svg
+            svg.block
             {
-                margin-left: 422px;
-                margin-top: 112px;
+                margin-left: 762px;
+                margin-top: 212px;
             }
-            svg polygon
+            svg.block polygon
             {
-                fill-opacity: 0.5;
                 fill: cyan;
-                stroke: black;
-                stroke-width: 1px;
-                stroke-opacity: 0;
+                fill-opacity: 0;
+            }
+            svg.block polygon:hover
+            {
+                fill: cyan;
+                fill-opacity: 0.5;
             }
         </style>
     </head>
     
     <body>
-        <div id="map">
-            <svg height="210" width="500">
-            <polygon 
-            points="
-            30,30
-            73 , 10 
-            117,5 
-            135,55  
-            154,120  
-            156 ,133  
-            62,151
-            37 , 105
-            25 , 76 
-            2 , 44" 
-            />
-        </svg>
+        
+        <div class = "popOut">
         </div>
+        
+        <div id="map">
+            <svg class = "block" height="500" width="500">
+                <polygon points = " 23 , 16
+                                                       116 , 42
+                                                       105 , 72
+                                                       14 , 43"/>
+            </svg>
+        </div>
+
     </body>
     
 </html>
