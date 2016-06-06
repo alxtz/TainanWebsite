@@ -5,33 +5,82 @@
         <meta charset="UTF-8">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
         <script>
+        var popedOut = false;
         function popOut()
         {
-            $("div.popOut").toggle();
+            //$("div.popOut").toggle();
+            if(popedOut==false)
+            {
+                $("div.popOut").animate({opacity: '1'} , 1000);
+                popedOut = true;
+            }
+            else
+            {
+                $("div.popOut").animate({opacity: '0'});
+                popedOut = false;
+            }
+            
+            var msg = new SpeechSynthesisUtterance("Fort Zeelandia");
+            window.speechSynthesis.speak(msg);
         }
         $(document).ready(function(){
-            $("svg.block polygon").click(function(){
+            $("svg.canvas polygon").click(function(){
                 popOut();
             });
         });
         </script>
         <style>
+            /*設定body*/
             body
             {
                 margin: 0;
                 border: 1px solid red;
             }
             
+            /*設定彈出視窗*/
             div.popOut
             {
+                border: 1px solid deeppink;
                 margin-left: 100px;
-                margin-top: 100px;
-                width: 30px;
-                height: 30px;
+                margin-top: 50px;
+                width: 500px;
+                height: 500px;
                 position: fixed;
-                background-color: blue;
-                display: none;
+                background-color: white;
+                /*display: none;*/
+                opacity: 0;
             }
+            /*設定toolBar*/
+            div.popOut div#toolBar
+            {
+                background-color: aquamarine;
+                height:20px;
+                width: 500px;
+            }
+            /*設定彈出視窗的圖片*/
+            div.popOut img
+            {
+                margin: 2%;
+                width: 96%;
+                height: 50%;
+            }
+            /*設定彈出視窗的文字說明方塊*/
+            div.popOut div#explainText
+            {
+                background-color: aquamarine;
+                width: 96%;
+                height: 30%;
+                margin: 2%;
+                padding:0;
+            }
+            /*設定文字說明方塊的文字*/
+            div.popOut div#explainText pre
+            {
+                margin: 0;
+                padding: 0;
+                font-size: 50%;
+            }
+            
             
             div#test
             {
@@ -56,7 +105,7 @@
             svg.canvas polygon
             {
                 fill: cyan;
-                fill-opacity: 0.5;
+                fill-opacity: 0;
             }
             svg.canvas polygon:hover
             {
@@ -69,14 +118,26 @@
     <body>
         
         <div class = "popOut">
+            <div id = "toolBar">   
+            </div>
+            <img src="Images/castle.jpg">
+            <div id = "explainText">
+                <pre>安平古堡，古稱奧倫治城（Orange）、位於今臺灣臺南市。
+最早建於1624年，是臺灣最早的要塞建築。自建城以來，曾經是荷蘭人統治臺灣的中樞。
+安平古堡有兩處遺蹟被列為古蹟，為國定古蹟臺灣城殘蹟。
+而一般民眾登高望遠的瞭望臺，多被以為是安平古堡。
+但事實上是1970年代將日治時期燈塔改建而成，不屬於古蹟。
+古堡建築屋舍純用紅色磚瓦，黃昏時與日落相煇映，景色優美。
+「安平夕照」1953年獲臺灣省政府選為臺灣八景之一。</pre>
+            </div>
         </div>
         
         <div id="map">
-            <svg class = "canvas" height="1020" width="620">
-                <polygon points = " 23 , 16
-                                                       116 , 42
-                                                       105 , 72
-                                                       14 , 43"/>
+            <svg class = "canvas" height="620" width="1020">
+                <polygon points = " 785 , 228
+                                                       878 , 254
+                                                       867 , 284
+                                                       776 , 255"/>
             </svg>
         </div>
 
