@@ -80,7 +80,36 @@
         
         function showAll()
         {
-            
+            document.getElementById('MyAudio').play();
+            var x = 0;
+            for(var i=0; i<10; i=i+1)
+            {
+                setTimeout(function(){
+                $("div.popOut").show();
+                $("div.popOut").css("z-index:1");
+                $("div.popOut").animate({opacity: '1'} , 1000);
+                popedOut = true;
+                $("div.popOut div#explainText pre").text(introTextChinese[x]);
+                
+                var path = "Images/" + x + ".jpg"
+                $("div.popOut img#main").attr("src" , path);
+                x = x+1;
+                if(x>=10)
+                {
+                    x=Math.floor((Math.random() * 10));
+                }
+                
+                setTimeout(function(){
+                   $("div.popOut").css("z-index:-1");
+                   $("div.popOut").animate({opacity: '0'} , 1000);
+                   popedOut = false;
+                   setTimeout(function() { $("div.popOut").toggle(); }, 1000); 
+                } , 3000);
+                
+                
+                } , i*5000);
+                
+            }
         }
         
         $(document).ready(function(){
@@ -342,13 +371,13 @@
             
            
            <div id="musicBlock">
-                <audio controls>
-                    <source src="/song.mp3" type="audio/mpeg">
+                <audio controls id="MyAudio">
+                    <source src="Music/song.mp3" type="audio/mpeg">
                 </audio>
             </div>
             
             <div id="view">
-                <p>顯示景點</p>
+                <p>幻燈片模式</p>
             </div>
         </div>
 
