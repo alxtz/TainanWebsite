@@ -54,7 +54,7 @@
                 $("div.popOut div#explainText pre").text(introTextChinese[placeName]);
                 
                 var path = "Images/" + placeName + ".jpg"
-                $("div.popOut img").attr("src" , path);
+                $("div.popOut img#main").attr("src" , path);
                 
                 var msg = new SpeechSynthesisUtterance(speakEnglish[placeName]);
                 window.speechSynthesis.speak(msg);
@@ -69,15 +69,43 @@
             }
         }
         
+        function back()
+        {
+            $("div.popOut").css("z-index:-1");
+            $("div.popOut").animate({opacity: '0'} , 1000);
+            popedOut = false;
+                
+           setTimeout(function() { $("div.popOut").toggle(); }, 1000);
+        }
+        
+        function showAll()
+        {
+            
+        }
+        
         $(document).ready(function(){
+            
+            
             //選取所有的polygon，給他們被點擊的功能
             $("svg.canvas polygon").click(function(){
                 var elementName = $(this).attr("placeName");
                 popOut(elementName);
             });
+            
+            $("#back").click(function(){
+                back();
+            });
+            
+            $("div#showBar div#view p").click(function(){
+                showAll();
+            });
+
+            
         });
         </script>
         <style>
+            @import url(http://fonts.googleapis.com/earlyaccess/cwtexfangsong.css);
+            
             /*設定body*/
             body
             {
@@ -110,13 +138,22 @@
                 width: 500px;
             }
             /*設定彈出視窗的圖片*/
-            div.popOut img
+            div.popOut img#main
             {
                 margin: 2%;
                 width: 96%;
                 height: 50%;
                 margin-bottom: 0px;
             }
+            
+            img#back
+            {
+                margin-top: 0.2%;
+                margin-left: 92%;
+                width: 40px;
+                length: 14px;
+            }
+            
             /*設定彈出視窗的文字說明方塊*/
             div.popOut div#explainText
             {
@@ -166,15 +203,57 @@
                 fill: cyan;
                 fill-opacity: 0.5;
             }
+            
+            div#showBar
+            {  
+                margin-top: -620px;
+                margin-left: 995px;
+                width: 320px;
+                height:700px;
+                position: fixed;
+                background-image: url("Images/bd2.jpg");
+                background-size: 100% 100%;
+            }
+            
+            div#showBar div#musicBlock
+            {
+                margin-left: -940px;
+                margin-top: 613px;
+                width: 300%;
+            }
+            
+            div#showBar div#musicBlock audio
+            {
+                width:200%;
+                margin-left: -550px;
+            }
+            
+            div#showBar div#view
+            {
+                margin-top:-650px;
+                margin-left:95px;
+            }
+            
+            div#showBar div#view p
+            {
+                font-size:200%;
+                font-family: 'cwTeXFangSong', serif;
+                font-weight: 580;
+                color:black;
+            }
+            
         </style>
     </head>
     
     <body>
         
         <div class = "popOut">
-            <div id = "toolBar">   
+            <div id = "toolBar">
+                <img id="back" src="Images/back.png">
             </div>
-            <img src="Images/castle.jpg">
+            
+            <img id="main" src="Images/castle.jpg">
+            
             <div id = "explainText">
                 <pre>test</pre>
             </div>
@@ -256,6 +335,21 @@
                                                          820 , 110" placeName = "9"/> <!--蚵灰窯文化館-->                                                                       
                                                          
             </svg>
+        </div>
+        
+        <div id="showBar">
+           
+            
+           
+           <div id="musicBlock">
+                <audio controls>
+                    <source src="/song.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+            
+            <div id="view">
+                <p>顯示景點</p>
+            </div>
         </div>
 
     </body>
